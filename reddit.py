@@ -19,16 +19,17 @@ class RedditUser:
 
 
 class Comment:
-    def __init__(self, id, text):
+    def __init__(self, id, text, datetime):
         self.id = id
         self.text = text
+        self.datetime = datetime
 
 
 def get_user_content(username):
     output = []
     user = reddit.redditor(username)
     for comment in user.comments.new(limit=25):
-        output.append(Comment(comment.id, comment.body))
+        output.append(Comment(comment.id, comment.body, comment.created_utc))
     return output
 
 
