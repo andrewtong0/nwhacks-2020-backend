@@ -9,6 +9,7 @@ myuser = mydb['user']
 
 
 def addUser(firstname, lastname, reddit_name):
+    x = None
     mydict = {
         'name': firstname + ' ' + lastname,
         'reddit_name': reddit_name,
@@ -41,19 +42,24 @@ def addUser(firstname, lastname, reddit_name):
     }
     x = myuser.insert_one(mydict)
 
+    return x
+
 
 def getRedditContent(obj):
     myquery = {
         'reddit_name': obj['reddit_name']
     }
-    myuser.update_one(myquery, {'$set': obj['reddit_content']})
+    myuser.update_one(myquery, {'$set': {'reddit_content': obj['reddit_content']}})
 
 
 def updateUser(name, character):
-    myuser.update_one({'name': name}, {'$set': character})
+    myuser.update_one({'name': name}, {'$set': {'character': character}})
 
 
 def addDiaryEntry(name, diary_entry):
     person = myuser.find_one({'name': name})
-    person.diary_entries.append(diary_entry)
-    myuser.update_one({'name': name}, {'$set': person.diary_entries})
+    person['diary_entries'].append(diary_entry)
+    myuser.update_one({'name': name}, {'$set': {'diary_entries': person['diary_entries']}})
+
+addUser('test', 'test', 'test')
+addUser('test', 'test', 'test')
