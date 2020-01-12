@@ -34,6 +34,13 @@ def home(first_name, last_name):
     return JSONEncoder().encode(x)
 
 
+@app.route("/api/<string:reddit_name>", methods=['POST'])
+def get_reddit_info(reddit_name):
+    dtb.getRedditContent(reddit_name)
+    user = dtb.myuser.find_one({'reddit_name': reddit_name})
+    return JSONEncoder().encode(user)
+
+
 if __name__ == "__main__":
     app.debug = True
     host = os.environ.get('IP', '127.0.0.1')

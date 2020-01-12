@@ -1,4 +1,5 @@
 import pymongo
+import reddit
 
 client = pymongo.MongoClient(
     "mongodb+srv://user:NmpeiIjEszTFpxoN@cluster0-qx6fz.azure.mongodb.net/test?retryWrites=true&w=majority")
@@ -45,11 +46,13 @@ def addUser(firstname, lastname, reddit_name):
     return x
 
 
-def getRedditContent(obj):
+def getRedditContent(reddit_name):
+    new_content = reddit.get_user_content(reddit_name)
+    name = myuser.find_one({'reddit_name': reddit_name})['name']
     myquery = {
-        'reddit_name': obj['reddit_name']
+        'name': name
     }
-    myuser.update_one(myquery, {'$set': {'reddit_content': obj['reddit_content']}})
+    myuser.update_one(myquery, {'$set': {'reddit_content': new_content}})
 
 
 def updateUser(name, character):
