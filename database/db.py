@@ -40,7 +40,7 @@ def addUser(firstname, lastname, reddit_name):
         },
         'reddit_content': []
     }
-    x = myuser.insert_one(mydict)
+    x = myuser.update(mydict, mydict, upsert= True)
 
     return x
 
@@ -61,5 +61,3 @@ def addDiaryEntry(name, diary_entry):
     person['diary_entries'].append(diary_entry)
     myuser.update_one({'name': name}, {'$set': {'diary_entries': person['diary_entries']}})
 
-addUser('test', 'test', 'test')
-addUser('test', 'test', 'test')
