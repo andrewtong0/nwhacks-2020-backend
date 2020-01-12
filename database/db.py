@@ -14,7 +14,6 @@ def addUser(firstname, lastname, reddit_name):
         'reddit_name': reddit_name,
         'diary_entries': [],
         'character': {
-            'name': '',
             'skills': {
                 'fitness': {
                     'level': 0,
@@ -33,6 +32,11 @@ def getRedditContent(obj):
     myquery = {
         'reddit_name': obj['reddit_name']
     }
-    myuser.update_one(myquery, obj['reddit_content'])
+    myuser.update_one(myquery, {'$set': obj['reddit_content']})
+
+
+def updateUser(name, character):
+    myuser.update_one({'name': name}, {'$set': character})
+
 
 
