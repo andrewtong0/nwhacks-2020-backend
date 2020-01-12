@@ -39,4 +39,7 @@ def updateUser(name, character):
     myuser.update_one({'name': name}, {'$set': character})
 
 
-
+def addDiaryEntry(name, diary_entry):
+    person = myuser.find_one({'name': name})
+    person.diary_entries.append(diary_entry)
+    myuser.update_one({'name': name}, {'$set': person.diary_entries})
