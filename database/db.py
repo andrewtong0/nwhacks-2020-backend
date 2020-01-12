@@ -11,7 +11,20 @@ myuser = mydb['user']
 def addUser(firstname, lastname, reddit_name):
     mydict = {
         'name': firstname + ' ' + lastname,
-        'reddit_name': reddit_name
+        'reddit_name': reddit_name,
+        'diary_entries': [],
+        'character': {
+            'name': '',
+            'skills': {
+                'fitness': {
+                    'level': 0,
+                    'exp': 0,
+                    'next_level_exp': 0
+                },
+                'academics': {}
+            }
+        },
+        'reddit_content': []
     }
     x = myuser.insert_one(mydict)
 
@@ -20,4 +33,6 @@ def getRedditContent(obj):
     myquery = {
         'reddit_name': obj['reddit_name']
     }
-    myuser.update_one(myquery, obj['content'])
+    myuser.update_one(myquery, obj['reddit_content'])
+
+
