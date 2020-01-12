@@ -20,7 +20,21 @@ def addUser(firstname, lastname, reddit_name):
                     'exp': 0,
                     'next_level_exp': 0
                 },
-                'academics': {}
+                'academics': {
+                    'level': 0,
+                    'exp': 0,
+                    'next_level_exp': 0
+                },
+                'career': {
+                    'level': 0,
+                    'exp': 0,
+                    'next_level_exp': 0
+                },
+                'social': {
+                    'level': 0,
+                    'exp': 0,
+                    'next_level_exp': 0
+                }
             }
         },
         'reddit_content': []
